@@ -1,0 +1,55 @@
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Go to admin panel</h2>
+  <div
+    class="form-control"
+    [ngClass]="{invalid:form.get('email').invalid&&form.get('email').touched}"
+  >
+    <label for="email"> Email:</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+    >
+    <div
+      *ngIf="form.get('email').invalid&&form.get('email').touched"
+      class="validation"
+    >
+      <small *ngIf="form.get('email').errors.required">
+        The email field is required
+      </small>
+
+      <small *ngIf="form.get('email').errors.email">
+          The email must have the format: "example@mail.com"
+      </small>
+    </div>
+  </div>
+  <div
+    class="form-control"
+    [ngClass]="{invalid:form.get('password').invalid&&form.get('password').touched}"
+  >
+    <label for="email"> Password:</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+    >
+    <div
+      *ngIf="form.get('password').invalid&&form.get('password').touched"
+      class="validation"
+    >
+      <small *ngIf="form.get('password').errors.required">
+        The password field is required
+      </small>
+      <small *ngIf="form.get('password').errors.minlength">
+          The min length of the password is {{form.get('password').errors.minlength.requiredLength}}
+      </small>
+    </div>
+  </div>
+  <button
+    type="submit"
+    [disabled]="form.invalid"
+    class="btn btn-primary"
+  >
+    Login
+  </button>
+</form>
